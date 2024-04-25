@@ -1,10 +1,14 @@
 import { Input } from "@/objects/input";
 import { Vector2D } from "@/objects/vector-2d";
 import { MonoBehaviour } from "@/objects/mono-behaviour";
+import { Collider } from "@/objects/collider";
 
 export class Player extends MonoBehaviour {
-  public position: Vector2D = new Vector2D(0, 0);
   public speed: number = 0.25;
+  public collider: Collider = new Collider(
+    new Vector2D(30, 30),
+    new Vector2D(0, 0)
+  );
 
   public update(deltaTime: number): void {
     const direction = new Vector2D(
@@ -12,7 +16,7 @@ export class Player extends MonoBehaviour {
       Input.getAxis("vertical")
     ).normalized;
 
-    this.position.translate(
+    this.collider.position.translate(
       direction.x * this.speed * deltaTime,
       direction.y * this.speed * deltaTime
     );
@@ -22,6 +26,11 @@ export class Player extends MonoBehaviour {
 
   public draw(context: CanvasRenderingContext2D): void {
     context.fillStyle = "blue";
-    context.fillRect(this.position.x, this.position.y, 30, 30);
+    context.fillRect(
+      this.collider.position.x,
+      this.collider.position.y,
+      this.collider.size.x,
+      this.collider.size.y
+    );
   }
 }
