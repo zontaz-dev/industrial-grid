@@ -4,10 +4,10 @@ import { MonoBehaviour } from "@/objects/mono-behaviour";
 import { Collider } from "@/objects/collider";
 
 export class Player extends MonoBehaviour {
-  public speed: number = 0.25;
-  public collider: Collider = new Collider(
-    new Vector2D(30, 30),
-    new Vector2D(0, 0)
+  private speed: number = 0.25;
+  private collider: Collider = new Collider(
+    new Vector2D(0, 0),
+    new Vector2D(30, 30)
   );
 
   public update(deltaTime: number): void {

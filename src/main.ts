@@ -2,15 +2,17 @@ import { GameLoop } from "@/objects/game-loop";
 import { Player } from "@/objects/player";
 import { MonoBehaviour } from "@/objects/mono-behaviour";
 import { Input } from "@/objects/input";
+import { Block } from "@/objects/block";
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 const context = canvas.getContext("2d") as CanvasRenderingContext2D;
 
 const player = new Player();
+const block = new Block();
 
 Input.initialize();
 
-const gameObjects: MonoBehaviour[] = [player];
+const gameObjects: MonoBehaviour[] = [block, player];
 
 function update(deltaTime: number) {
   gameObjects.forEach((g) => g.update(deltaTime));

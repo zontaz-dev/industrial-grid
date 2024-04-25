@@ -3,10 +3,10 @@ type UpdateFunction = (deltaTime: number) => void;
 type DrawFunction = () => void;
 
 export class GameLoop {
-  public lastFrameTime: number = 0;
-  public accumulatedTime: number = 0;
-  public timeStep: number = 1000 / 60;
-  public isRunning: boolean = false;
+  private lastFrameTime: number = 0;
+  private accumulatedTime: number = 0;
+  private timeStep: number = 1000 / 60;
+  private isRunning: boolean = false;
 
   public constructor(
     private readonly update: UpdateFunction,
@@ -14,7 +14,14 @@ export class GameLoop {
     private readonly draw: DrawFunction
   ) {}
 
-  public loop = (timestamp: number) => {
+  public start(): void {
+    if (!this.isRunning) {
+      this.isRunning = true;
+      requestAnimationFrame(this.loop);
+    }
+  }
+
+  private loop = (timestamp: number) => {
     if (!this.isRunning) return;
 
     const deltaTime = timestamp - this.lastFrameTime;
@@ -32,11 +39,4 @@ export class GameLoop {
 
     requestAnimationFrame(this.loop);
   };
-
-  public start(): void {
-    if (!this.isRunning) {
-      this.isRunning = true;
-      requestAnimationFrame(this.loop);
-    }
-  }
 }
