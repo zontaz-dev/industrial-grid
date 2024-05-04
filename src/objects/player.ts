@@ -4,13 +4,16 @@ import { MonoBehaviour } from "@/objects/mono-behaviour";
 import { Collider } from "@/objects/collider";
 
 export class Player extends MonoBehaviour {
-  private speed: number = 0.25;
-  private collider: Collider = new Collider(
-    new Vector2D(0, 0),
-    new Vector2D(30, 30)
-  );
+  speed: number = 0.25;
+  collider: Collider;
 
-  public update(deltaTime: number): void {
+  constructor() {
+    super();
+
+    this.collider = new Collider(new Vector2D(0, 0), new Vector2D(30, 30));
+  }
+
+  update(deltaTime: number) {
     const direction = new Vector2D(
       Input.getAxis("horizontal"),
       Input.getAxis("vertical")
@@ -22,9 +25,7 @@ export class Player extends MonoBehaviour {
     );
   }
 
-  public fixedUpdate(): void {}
-
-  public draw(context: CanvasRenderingContext2D): void {
+  draw(context: CanvasRenderingContext2D) {
     context.fillStyle = "blue";
     context.fillRect(
       this.collider.position.x,

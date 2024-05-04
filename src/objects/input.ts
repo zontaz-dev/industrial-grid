@@ -1,7 +1,7 @@
 export class Input {
   private static readonly keysDown: string[] = [];
 
-  public static initialize(): void {
+  static initialize() {
     window.addEventListener("keydown", (e) => {
       !this.keysDown.find((k) => k === e.key) && this.keysDown.push(e.key);
     });
@@ -13,11 +13,11 @@ export class Input {
     });
   }
 
-  public static getKeyDown(key: string): boolean {
+  static getKeyDown(key: string) {
     return Boolean(this.keysDown.find((k) => k === key));
   }
 
-  public static getAxis(axis: "horizontal" | "vertical"): number {
+  static getAxis(axis: "horizontal" | "vertical") {
     if (axis === "horizontal") {
       return (Input.getKeyDown("a") ? -1 : 0) + (Input.getKeyDown("d") ? 1 : 0);
     } else {

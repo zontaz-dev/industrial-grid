@@ -8,13 +8,21 @@ export class GameLoop {
   private timeStep: number = 1000 / 60;
   private isRunning: boolean = false;
 
-  public constructor(
-    private readonly update: UpdateFunction,
-    private readonly fixedUpdate: FixedUpdateFunction,
-    private readonly draw: DrawFunction
-  ) {}
+  private readonly update: UpdateFunction;
+  private readonly fixedUpdate: FixedUpdateFunction;
+  private readonly draw: DrawFunction;
 
-  public start(): void {
+  constructor(
+    update: UpdateFunction,
+    fixedUpdate: FixedUpdateFunction,
+    draw: DrawFunction
+  ) {
+    this.update = update;
+    this.fixedUpdate = fixedUpdate;
+    this.draw = draw;
+  }
+
+  start() {
     if (!this.isRunning) {
       this.isRunning = true;
       requestAnimationFrame(this.loop);

@@ -3,16 +3,15 @@ import { MonoBehaviour } from "./mono-behaviour";
 import { Vector2D } from "./vector-2d";
 
 export class Block extends MonoBehaviour {
-  private collider: Collider = new Collider(
-    new Vector2D(100, 100),
-    new Vector2D(30, 30)
-  );
+  collider: Collider;
 
-  public update(): void {}
+  constructor() {
+    super();
 
-  public fixedUpdate(): void {}
+    this.collider = new Collider(new Vector2D(100, 100), new Vector2D(30, 30));
+  }
 
-  public draw(context: CanvasRenderingContext2D): void {
+  draw(context: CanvasRenderingContext2D) {
     context.fillStyle = "red";
     context.fillRect(
       this.collider.position.x,
