@@ -25,9 +25,37 @@ export class Vector2D {
     return this;
   }
 
+  setX(x: number) {
+    this.x = x;
+
+    return this;
+  }
+
+  setY(y: number) {
+    this.y = y;
+
+    return this;
+  }
+
   translate(x: number, y: number) {
     this.set(this.x + x, this.y + y);
 
     return this;
+  }
+
+  translateX(x: number) {
+    this.setX(this.x + x);
+
+    return this;
+  }
+
+  translateY(y: number) {
+    this.setY(this.y + y);
+
+    return this;
+  }
+
+  static get zero() {
+    return new Vector2D(0, 0);
   }
 }

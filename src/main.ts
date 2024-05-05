@@ -3,14 +3,25 @@ import { Player } from "@/objects/player";
 import { MonoBehaviour } from "@/objects/mono-behaviour";
 import { Input } from "@/objects/input";
 import { Block } from "@/objects/block";
+import { Collider } from "@/objects/collider";
+import { CollisionManager } from "@/objects/collision-manager";
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 const context = canvas.getContext("2d") as CanvasRenderingContext2D;
 
-const player = new Player();
-const block = new Block();
-
 Input.initialize();
+
+const collisionManager = new CollisionManager();
+
+const playerCollider = new Collider(collisionManager);
+const player = new Player(playerCollider);
+playerCollider.position.set(0, 0);
+playerCollider.size.set(30, 30);
+
+const blockCollider = new Collider(collisionManager);
+const block = new Block(blockCollider);
+blockCollider.position.set(50, 150);
+blockCollider.size.set(30, 30);
 
 const gameObjects: MonoBehaviour[] = [block, player];
 
@@ -30,4 +41,5 @@ function draw() {
 }
 
 const gameLoop = new GameLoop(update, fixedUpdate, draw);
+
 gameLoop.start();

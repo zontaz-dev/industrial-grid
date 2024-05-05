@@ -1,11 +1,21 @@
-import { Vector2D } from "./vector-2d";
+import { CollisionManager } from "@/objects/collision-manager";
+import { Vector2D } from "@/objects/vector-2d";
 
 export class Collider {
   position: Vector2D;
   size: Vector2D;
 
-  constructor(position: Vector2D, size: Vector2D) {
-    this.position = position;
-    this.size = size;
+  private readonly _collisionManager: CollisionManager;
+
+  constructor(collisionManager: CollisionManager) {
+    this.position = Vector2D.zero;
+    this.size = Vector2D.zero;
+    this._collisionManager = collisionManager;
+
+    this._collisionManager.addCollider(this);
+  }
+
+  get collisions() {
+    return this._collisionManager.getCollisions(this);
   }
 }
